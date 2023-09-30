@@ -123,5 +123,5 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'nikitaI7@yandex.ru'  # Замените на вашу почту
-EMAIL_HOST_PASSWORD = 'ParolvsesibN1#'  # Замените на пароль от вашей почты
+EMAIL_HOST_USER = 'nikitaI7@yandex.ru'  # Замените на вашу почту яндекса
+EMAIL_HOST_PASSWORD = '123321'  # Замените на пароль от вашей почты
