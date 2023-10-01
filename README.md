@@ -1,33 +1,66 @@
-# R4C - Robots for consumers
+# Description
+This project implements the functionality that is in the file task.md.
 
-## Небольшая предыстория.
-Давным-давно, в далёкой-далёкой галактике, была компания производящая различных 
-роботов. 
+## API
 
-Каждый робот(**Robot**) имел определенную модель выраженную двух-символьной 
-последовательностью(например R2). Одновременно с этим, модель имела различные 
-версии(например D2). Напоминает популярный телефон различных моделей(11,12,13...) и его версии
-(X,XS,Pro...). Вне компании роботов чаще всего называли по серийному номеру, объединяя модель и версию(например R2-D2).
+1. POST: http://localhost:8000/api/create_robot
 
-Также у компании были покупатели(**Customer**) которые периодически заказывали того или иного робота. 
+   An API endpoint has been created that accepts and processes information in JSON format.  
+   Request to this API allows you to perform work in the database.
+   
+   Parameters:
+   - `serial number` = char[5]
+   - `models` = char[2]
+   - `version` = char[2]
+   - `created` = "yyyy-mm-dd hh:mm:ss"
+    
+2. GET: http://localhost:8000/api/excel_table
 
-Когда роботов не было в наличии - заказы покупателей(**Order**) попадали в список ожидания.
+   The API request generates and uploads an aggregation table for the last 7 days of data on created robots.
 
----
-## Что делает данный код?
-Это заготовка для сервиса, который ведет учет произведенных роботов,а также 
-выполняет некие операции связанные с этим процессом.
+The functionality is also implemented that if there is an open order for a certain robot model, then as soon as this robot is created, a letter about its availability is sent to the mail of the user who created the order.
 
-Сервис нацелен на удовлетворение потребностей трёх категорий пользователей:
-- Технические специалисты компании. Они будут присылать информацию
-- Менеджмент компании. Они будут запрашивать информацию
-- Клиенты. Им будут отправляться информация
-___
+## Launch
 
-## Как с этим работать?
-- Создать для этого проекта репозиторий на GitHub
-- Открыть данный проект в редакторе/среде разработки которую вы используете
-- Ознакомиться с задачами в файле tasks.md
-- Написать понятный и поддерживаемый код для каждой задачи 
-- Сделать по 1 отдельному PR с решением для каждой задачи
-- Прислать ссылку на своё решение
+It is assumed that you have already cloned the project and activated the virtual environment.
+First, you need to install dependencies in the virtual environment from a file requirements.txt:
+
+```bash
+(venv)$ pip install -r requirements.txt 
+```
+Then, to a file .env, fill in the parameters for the email configuration:
+
+Parameters:
+
+EMAIL_HOST - SMTP message source
+EMAIL_PORT - SMTP port for sending messages
+EMAIL_HOST_USER - your email login
+EMAIL_HOST_PASSWORD - your email password
+
+Important note: This project uses the SMTP protocol of Yandex Mail. If you want to use Gmail or email, here are some examples:
+
+For Gmail:
+
+    EMAIL ADDRESS  = 'smtp.gmail.com '
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = "your@gmail.com "
+    EMAIL_HOST_PASSWORD = "password"
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
+
+For Mail:
+
+    EMAIL ADDRESS = 'smtp.mail.ru '
+    EMAIL_PORT = 25
+    EMAIL_HOST_USER = "your@mail.ru "
+    EMAIL_HOST_PASSWORD = "password"
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
+
+Now you can create migrations, run the project and check the functionality:
+   ```bash
+    (venv)$ python manage.py makemigrations      
+    (venv)$ python manage.py migrate      
+    (venv)$ python manage.py runserver
+  ```
+    

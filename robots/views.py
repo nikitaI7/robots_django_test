@@ -35,6 +35,9 @@ class CreateRobotView(View):
 
 
 def excel_table_view(request):
+    """
+    1.Функция работает в соответствии с ТЗ, но нужно подумать над оптимизацией. Например хранение предыдущих агрегаций.
+    """
     # Создаем новый Excel-файл
     workbook = Workbook()
 
